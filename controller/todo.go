@@ -11,11 +11,25 @@ import (
 func GetTodos(Context *gin.Context) {
 	Context.IndentedJSON(http.StatusOK, data.Todos)
 }
+
 func AddTodo(Context *gin.Context) {
 	var newTodo types.Todo
 	if err := Context.BindJSON(&newTodo); err != nil {
+		Context.JSON(http.StatusBadRequest, gin.H{"error": "Invalid Data Type"})
 		return
 	}
 	data.Todos = append(data.Todos, newTodo)
 	Context.IndentedJSON(http.StatusOK, newTodo)
 }
+
+func GetTodo(Context *gin.Context) {
+	id := Context.Param("id")
+	todoGotten, error := data.FetchTodoById(id)
+	if error != nil {
+		Context.JSON(http.StatusNotFound, gin.H{"error": "Todo Not Found"}) //Response with an error object if error is nil
+		return
+	}
+	Context.IndentedJSON(http.StatusOK, &todoGotten)
+}
+
+
