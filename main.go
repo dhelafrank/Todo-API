@@ -1,11 +1,15 @@
 package main
 
 import (
-	"todo-api/types"
+	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
-var todos = []types.Todo{
-	{ID: "1", Item: "Clean Room", Completed: false},
-	{ID: "2", Item: "Code Go", Completed: false},
-	{ID: "3", Item: "Read Book", Completed: false},
+func main() {
+	router := gin.Default() //Here router is our server
+	
+	//ROUTES
+	router.GET("/todos") 
+	
+	router.Run("localhost:9090")
 }
