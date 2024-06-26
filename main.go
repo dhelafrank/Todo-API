@@ -12,6 +12,7 @@ func main() {
 	//ROUTES
 	router.GET("/todos", controller.GetTodos)
 	router.GET("/todos/:id", controller.GetTodo)
+	router.PATCH("/todos/:id", controller.ToggleTodoStatus)
 	router.POST("/todos", controller.AddTodo)
 
 	router.Run("localhost:9090")
