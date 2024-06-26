@@ -26,7 +26,7 @@ func GetTodo(Context *gin.Context) {
 	id := Context.Param("id")
 	todoGotten, error := data.FetchTodoById(id)
 	if error != nil {
-		Context.JSON(http.StatusNotFound, gin.H{"error": "Todo Not Found"}) //Response with an error object if error is nil
+		Context.JSON(http.StatusNotFound, gin.H{"error": "Todo Not Found"}) //Respond with an error object if error is not nil
 		return
 	}
 	Context.IndentedJSON(http.StatusOK, &todoGotten)
@@ -36,7 +36,7 @@ func ToggleTodoStatus(Context *gin.Context) {
 	id := Context.Param("id")
 	todoGotten, error := data.FetchTodoById(id)
 	if error != nil {
-		Context.JSON(http.StatusNotFound, gin.H{"error": "Todo Not Found"}) //Response with an error object if error is nil
+		Context.JSON(http.StatusNotFound, gin.H{"error": "Todo Not Found"}) //Respond with an error object if error is not nil
 		return
 	}
 	todoGotten.Completed = !todoGotten.Completed
